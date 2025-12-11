@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Baguio City Hazardous Waste Management</title>
+    <title>Baguio City Hazardous Waste Storage Facility</title>
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     <style>
         body { font-family: 'Segoe UI', Arial, sans-serif; margin: 0; padding: 0; background-color: #f8f9fa; color: #333; line-height: 1.6; }
@@ -25,6 +25,7 @@
         .card:hover { transform: translateY(-5px); }
         .card h3 { margin-top: 0; color: #228B22; }
         .card .planned { background: #fff3cd; padding: 10px; border-left: 4px solid #ffc107; border-radius: 4px; }
+        .important-note { background: #d4edda; color: #155724; padding: 15px; border-radius: 8px; margin: 20px 0; text-align: center; font-weight: bold; }
         .hidden { display: none; }
         #map { height: 500px; border-radius: 10px; margin-top: 20px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); }
         footer { text-align: center; padding: 20px; background: #333; color: white; margin-top: 40px; }
@@ -33,183 +34,35 @@
 </head>
 <body>
     <header>
-        <h1>Baguio City Hazardous Waste Management</h1>
-        <p>Safe disposal guide for household hazardous waste • City of Pines</p>
+        <h1>Baguio City Hazardous Waste Storage Facility</h1>
+        <p>Managed by CEPMO • Safe disposal for select household hazardous waste • City of Pines</p>
     </header>
 
     <nav>
         <a href="#home">Home</a>
-        <a href="#database">Hazardous Waste Guide</a>
+        <a href="#database">Accepted Waste Guide</a>
         <a href="#about">Contact & Info</a>
     </nav>
 
     <div class="container" id="home">
-        <h2 style="text-align:center; color:#228B22;">Welcome to Baguio's Hazardous Waste Resource</h2>
+        <h2 style="text-align:center; color:#228B22;">Welcome</h2>
+        <div class="important-note">
+            Current Status (December 2025): The facility currently accepts ONLY Used Oil, Busted Fluorescent Lamps (BFL), E-Waste, and Expired Medicines.<br>
+            Other hazardous items are not yet managed here—contact your barangay or CEPMO for guidance.
+        </div>
         <p style="text-align:center; font-size:1.1em; max-width:800px; margin:20px auto;">
-            This site provides information on safely managing and disposing of household hazardous waste in Baguio City. 
-            The Baguio Hazardous Waste Storage Facility, managed by the City Environment and Parks Management Office (CEPMO), includes the operational Bakakeng Central e-waste TSD and the planned The4E Hazardous Waste Storage Facility for broader hazardous materials.
-            Key personnel: Atty. Rhenan G. Diwas (CEPMO Head and Facility Managing Head) and Engr. Wilbur S. Suanding (Pollution Control Officer and Head of Wastewater and Hazardous Waste Management Division).
-            Protect our environment and health—never throw hazardous items in regular trash or drains.
+            The Baguio Hazardous Waste Storage Facility, managed by the City Environment and Parks Management Office (CEPMO) under Atty. Rhenan G. Diwas (Head and Managing Head) and Engr. Wilbur S. Suanding (Pollution Control Officer and WHWMD Head), includes the operational Bakakeng Central TSD (focused on e-waste and BFL) and the planned The4E Facility for expanded hazardous waste management.
         </p>
 
         <div class="tabs" id="database">
-            <button class="tab-btn active" data-tab="waste">Hazardous Waste Items</button>
+            <button class="tab-btn active" data-tab="waste">Accepted Waste Items</button>
             <button class="tab-btn" data-tab="locations">Drop-Off & Storage Facilities</button>
         </div>
 
-        <!-- Hazardous Waste Items Tab -->
+        <!-- Accepted Waste Items Tab -->
         <div id="waste" class="tab-content active">
-            <input type="text" id="search-waste" placeholder="Search items (e.g., batteries, bulbs, paints)...">
-            <div class="grid" id="waste-grid">
-                <div class="card">
-                    <h3>Batteries</h3>
-                    <p><strong>Description:</strong> Contain heavy metals (lead, mercury, cadmium).</p>
-                    <p><strong>Disposal:</strong> Bring to barangay collections or CEPMO events. Do not trash.</p>
-                </div>
-                <div class="card">
-                    <h3>E-Waste (Electronics)</h3>
-                    <p><strong>Description:</strong> Old phones, computers, appliances with toxic components.</p>
-                    <p><strong>Disposal:</strong> Drop at Bakakeng Central E-Waste Facility or collection events.</p>
-                </div>
-                <div class="card">
-                    <h3>Fluorescent Bulbs & CFLs</h3>
-                    <p><strong>Description:</strong> Contain mercury.</p>
-                    <p><strong>Disposal:</strong> Handle carefully; bring to special collections via barangay/CEPMO.</p>
-                </div>
-                <div class="card">
-                    <h3>Paints & Solvents</h3>
-                    <p><strong>Description:</strong> Contain VOCs and chemicals.</p>
-                    <p><strong>Disposal:</strong> Dry out latex paint if allowed; bring others to hazardous waste events (future: The4E).</p>
-                </div>
-                <div class="card">
-                    <h3>Household Cleaners</h3>
-                    <p><strong>Description:</strong> Bleach, ammonia—corrosive/toxic.</p>
-                    <p><strong>Disposal:</strong> Do not pour down drains; contact CEPMO for collection.</p>
-                </div>
-                <div class="card">
-                    <h3>Pesticides</h3>
-                    <p><strong>Description:</strong> Toxic to humans and environment.</p>
-                    <p><strong>Disposal:</strong> Special hazardous waste collection only (planned: The4E).</p>
-                </div>
-                <div class="card">
-                    <h3>Used Oil & Antifreeze</h3>
-                    <p><strong>Description:</strong> Pollutes water and soil.</p>
-                    <p><strong>Disposal:</strong> Bring to authorized recyclers or events (future: The4E).</p>
-                </div>
-                <div class="card">
-                    <h3>Medications</h3>
-                    <p><strong>Description:</strong> Contaminate water if flushed.</p>
-                    <p><strong>Disposal:</strong> Return to pharmacies or take-back programs.</p>
-                </div>
+            <input type="text" id="search-waste" placeholder="Search accepted items...">
+            <div class="important-note">
+                Only the following items are currently accepted. More types will be added as facilities expand (e.g., via The4E).
             </div>
-        </div>
-
-        <!-- Facilities Tab -->
-        <div id="locations" class="tab-content">
-            <input type="text" id="search-location" placeholder="Search facilities...">
-            <p style="text-align:center;"><strong>Main Facilities:</strong> The Baguio Hazardous Waste Storage Facility is managed by CEPMO under Atty. Rhenan G. Diwas (Head and Managing Head) and Engr. Wilbur S. Suanding (PCO and WHWMD Head). It includes Bakakeng Central (operational for e-waste) and The4E (planned centralized TSD for broader hazardous waste).<br>
-            For other items, contact your barangay or CEPMO for scheduled collections. Updates as of Dec 2025.</p>
-
-            <div id="map"></div>
-            <div class="grid" id="locations-list">
-                <!-- Filled by JS -->
-            </div>
-        </div>
-    </div>
-
-    <footer id="about">
-        <p>Baguio City Hazardous Waste Management • Data as of December 2025</p>
-        <p>Managed by CEPMO: Atty. Rhenan G. Diwas (Head), Engr. Wilbur S. Suanding (PCO & WHWMD Head) • Check baguio.gov.ph for updates • Always verify with local authorities</p>
-    </footer>
-
-    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-    <script>
-        // Tab switching
-        function openTab(tabName) {
-            document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
-            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
-            document.getElementById(tabName).classList.add('active');
-            document.querySelector(`.tab-btn[data-tab="${tabName}"]`).classList.add('active');
-
-            if (tabName === 'locations' && !window.mapInitialized) {
-                initializeMap();
-                window.mapInitialized = true;
-            }
-        }
-
-        document.querySelectorAll('.tab-btn').forEach(btn => {
-            btn.addEventListener('click', () => openTab(btn.dataset.tab));
-        });
-
-        // Nav handling
-        document.querySelectorAll('nav a').forEach(link => {
-            link.addEventListener('click', function(e) {
-                const href = this.getAttribute('href');
-                if (href === '#database') {
-                    e.preventDefault();
-                    openTab('waste');
-                    window.scrollTo({ top: document.querySelector('.tabs').offsetTop - 80, behavior: 'smooth' });
-                } else {
-                    document.querySelector(href).scrollIntoView({ behavior: 'smooth' });
-                }
-            });
-        });
-
-        // Waste search
-        document.getElementById('search-waste').addEventListener('input', function() {
-            const query = this.value.toLowerCase();
-            document.querySelectorAll('#waste-grid .card').forEach(card => {
-                card.classList.toggle('hidden', !card.textContent.toLowerCase().includes(query));
-            });
-        });
-
-        // Locations data (Baguio-focused, including planned The4E)
-        const locations = [
-            { name: "Bakakeng Central E-Waste TSD Facility", city: "Baguio City", address: "Bakakeng Central/Sur MRF", hours: "Contact CEPMO for schedule", notes: "Operational; primary for e-waste; household hazardous collections", lat: 16.426, lng: 120.568, planned: false },
-            { name: "The4E Hazardous Waste Storage Facility", city: "Baguio City", address: "Dontogan Area (DA Bureau of Soils Property)", hours: "Under construction; expected operational 2026+", notes: "Planned centralized TSD for hazardous wastes (batteries, cleaners, pesticides, oils); part of 10-year plan", lat: 16.420, lng: 120.580, planned: true },
-            { name: "CEPMO Office / Barangay Collections", city: "Baguio City", address: "City Hall or local barangay halls", hours: "Varies by event", notes: "For batteries, bulbs, paints, etc. via scheduled pickups", lat: 16.415, lng: 120.593, planned: false }
-        ];
-
-        let map, markers;
-
-        function initializeMap() {
-            map = L.map('map').setView([16.415, 120.593], 13); // Centered on Baguio
-            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-                attribution: '&copy; OpenStreetMap contributors'
-            }).addTo(map);
-
-            markers = L.markerClusterGroup();
-            locations.forEach(loc => {
-                const marker = L.marker([loc.lat, loc.lng]);
-                const popupContent = `<b>${loc.name}</b><br>${loc.address}<br><i>${loc.hours}</i><br>${loc.notes}`;
-                marker.bindPopup(popupContent);
-                markers.addLayer(marker);
-
-                const card = document.createElement('div');
-                card.className = 'card';
-                let plannedHtml = '';
-                if (loc.planned) {
-                    plannedHtml = `<div class="planned"><strong>Status:</strong> Planned/Under Development</div>`;
-                }
-                card.innerHTML = `<h3>${loc.name}</h3>
-                                  <p><strong>Location:</strong> ${loc.city}</p>
-                                  <p><strong>Address:</strong> ${loc.address}</p>
-                                  <p><strong>Hours/Info:</strong> ${loc.hours}</p>
-                                  <p><strong>Notes:</strong> ${loc.notes}</p>
-                                  ${plannedHtml}
-                                  <p><strong>GPS:</strong> ${loc.lat.toFixed(4)}, ${loc.lng.toFixed(4)}</p>`;
-                document.getElementById('locations-list').appendChild(card);
-            });
-            map.addLayer(markers);
-        }
-
-        // Location search
-        document.getElementById('search-location').addEventListener('input', function() {
-            const query = this.value.toLowerCase();
-            document.querySelectorAll('#locations-list .card').forEach(card => {
-                card.classList.toggle('hidden', !card.textContent.toLowerCase().includes(query));
-            });
-        });
-    </script>
-</body>
-</html>
+            <div class="grid" id="waste
