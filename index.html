@@ -136,39 +136,39 @@
             </div>
         </div>
 
-        <!-- Drop-Off & Collection Points Tab (NO MAP – just list) -->
+        <!-- Drop-Off & Collection Points Tab -->
         <div id="locations" class="tab-content">
             <input type="text" id="search-location" placeholder="Search drop-off points or events...">
             <p style="text-align:center; font-size:1.1em; max-width:900px; margin:0 auto 30px;">
                 Contact CEPMO for current schedules and requirements. Collection events are often announced on social media or barangay notices.
             </p>
-            <div class="grid" id="locations-list">
+            <div class="grid">
                 <div class="card">
                     <h3>Bakakeng Central Permanent Drop-Off</h3>
                     <p><strong>Address:</strong> Bakakeng Central/Sur MRF, Baguio City</p>
                     <p><strong>Hours/Info:</strong> Contact CEPMO for schedule</p>
-                    <p><strong>Notes:</strong> Main permanent drop-off for the 4 accepted items (Used Oil, BFL, E-Waste, Expired Medicines)</p>
+                    <p><strong>Notes:</strong> Main permanent drop-off for the 4 accepted items</p>
                     <p><strong>GPS (approx):</strong> 16.3960, 120.5783</p>
                 </div>
                 <div class="card">
                     <h3>Scheduled Collection Events</h3>
                     <p><strong>Address:</strong> Various locations (e.g., Malcom Square, barangays, schools)</p>
                     <p><strong>Hours/Info:</strong> Announced events only</p>
-                    <p><strong>Notes:</strong> Regular drives for e-waste and HHW – check CEPMO Facebook or barangay announcements</p>
-                    <p><strong>Example location GPS:</strong> Malcom Square – 16.4138, 120.5957</p>
+                    <p><strong>Notes:</strong> Regular drives for e-waste and HHW – check CEPMO announcements</p>
+                    <p><strong>Example location:</strong> Malcom Square – GPS 16.4138, 120.5957</p>
                 </div>
                 <div class="card">
                     <h3>The4E Hazardous Waste Facility (Planned)</h3>
                     <p><strong>Address:</strong> Dontogan Area (near DA Bureau of Soils)</p>
                     <p><strong>Hours/Info:</strong> Expected operational 2026+</p>
-                    <p><strong>Notes:</strong> Future permanent site for expanded hazardous waste management</p>
+                    <p><strong>Notes:</strong> Future permanent site for expanded management</p>
                     <p><strong>GPS (approx):</strong> 16.3818, 120.5722</p>
                 </div>
                 <div class="card">
                     <h3>CEPMO Coordination Office</h3>
                     <p><strong>Address:</strong> Baguio City Hall</p>
                     <p><strong>Hours/Info:</strong> Regular office hours</p>
-                    <p><strong>Notes:</strong> Best place to inquire about schedules, requirements, or nearest drop-off</p>
+                    <p><strong>Notes:</strong> Best place to inquire about schedules and requirements</p>
                     <p><strong>GPS (approx):</strong> 16.4140, 120.5910</p>
                 </div>
             </div>
@@ -182,14 +182,18 @@
     </footer>
 
     <script>
+        // Tab switching
         function openTab(tabName) {
             document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
             document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
             document.getElementById(tabName).classList.add('active');
             document.querySelector(`.tab-btn[data-tab="${tabName}"]`).classList.add('active');
         }
-        document.querySelectorAll('.tab-btn').forEach(btn => btn.addEventListener('click', () => openTab(btn.dataset.tab)));
+        document.querySelectorAll('.tab-btn').forEach(btn => {
+            btn.addEventListener('click', () => openTab(btn.dataset.tab));
+        });
 
+        // Nav links
         document.querySelectorAll('nav a').forEach(link => {
             link.addEventListener('click', function(e) {
                 const href = this.getAttribute('href');
@@ -197,23 +201,30 @@
                     e.preventDefault();
                     openTab('accepted');
                     window.scrollTo({ top: document.querySelector('.tabs').offsetTop - 100, behavior: 'smooth' });
-                } else {
+                } else if (document.querySelector(href)) {
                     document.querySelector(href).scrollIntoView({ behavior: 'smooth' });
                 }
             });
         });
 
-        // Search functions (for all tabs)
-        ['accepted', 'general', 'locations'].forEach(id => {
-            const searchInput = document.getElementById(`search-${id}`);
-            if (searchInput) {
-                searchInput.addEventListener('input', function() {
-                    const query = this.value.toLowerCase();
-                    document.querySelectorAll(`#${id === 'locations' ? 'locations' : id}-list .card, #${id === 'locations' ? 'locations' : id} .card`).forEach(card => {
-                        card.classList.toggle('hidden', !card.textContent.toLowerCase().includes(query));
-                    });
-                });
-            }
+        // Search in all tabs
+        document.getElementById('search-accepted').addEventListener('input', function() {
+            const query = this.value.toLowerCase();
+            document.querySelectorAll('#accepted .card').forEach(card => {
+                card.classList.toggle('hidden', !card.textContent.toLowerCase().includes(query));
+            });
+        });
+        document.getElementById('search-general').addEventListener('input', function() {
+            const query = this.value.toLowerCase();
+            document.querySelectorAll('#general .card').forEach(card => {
+                card.classList.toggle('hidden', !card.textContent.toLowerCase().includes(query));
+            });
+        });
+        document.getElementById('search-location').addEventListener('input', function() {
+            const query = this.value.toLowerCase();
+            document.querySelectorAll('#locations .card').forEach(card => {
+                card.classList.toggle('hidden', !card.textContent.toLowerCase().includes(query));
+            });
         });
     </script>
 </body>
