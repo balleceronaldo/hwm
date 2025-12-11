@@ -47,12 +47,28 @@
     <div class="container" id="home">
         <h2 style="text-align:center; color:#228B22;">Welcome</h2>
         <div class="important-note">
-            Current Status (December 2025): The facility currently accepts ONLY Used Oil, Busted Fluorescent Lamps (BFL), E-Waste, and Expired Medicines.<br>
-            Other hazardous items are not yet managed here—contact your barangay or CEPMO for guidance.
+            Current Status (December 2025): The facility accepts ONLY:<br>
+            • Used Oil • Busted Fluorescent Lamps (BFL) • E-Waste • Expired Medicines<br>
+            Other items (e.g., batteries, paints, cleaners, pesticides) are NOT accepted. Contact your barangay or CEPMO for alternatives.
         </div>
         <p style="text-align:center; font-size:1.1em; max-width:800px; margin:20px auto;">
-            The Baguio Hazardous Waste Storage Facility, managed by the City Environment and Parks Management Office (CEPMO) under Atty. Rhenan G. Diwas (Head and Managing Head) and Engr. Wilbur S. Suanding (Pollution Control Officer and WHWMD Head), includes the operational Bakakeng Central TSD (focused on e-waste and BFL) and the planned The4E Facility for expanded hazardous waste management.
+            The Baguio Hazardous Waste Storage Facility, managed by the City Environment and Parks Management Office (CEPMO) under Atty. Rhenan G. Diwas (Head and Managing Head) and Engr. Wilbur S. Suanding (Pollution Control Officer and WHWMD Head), includes the operational Bakakeng Central TSD and the planned The4E Facility for future expansion.
         </p>
+
+<grok-card data-id="873313" data-type="image_card"></grok-card>
+
+
+
+<grok-card data-id="bf291b" data-type="image_card"></grok-card>
+
+
+
+<grok-card data-id="0503c4" data-type="image_card"></grok-card>
+
+
+
+<grok-card data-id="78a35b" data-type="image_card"></grok-card>
+
 
         <div class="tabs" id="database">
             <button class="tab-btn active" data-tab="waste">Accepted Waste Items</button>
@@ -61,8 +77,167 @@
 
         <!-- Accepted Waste Items Tab -->
         <div id="waste" class="tab-content active">
-            <input type="text" id="search-waste" placeholder="Search accepted items...">
+            <input type="text" id="search-waste" placeholder="Search accepted items (used oil, BFL, e-waste, expired medicines)...">
             <div class="important-note">
-                Only the following items are currently accepted. More types will be added as facilities expand (e.g., via The4E).
+                Only these four items are currently accepted at the facility.
             </div>
-            <div class="grid" id="waste
+            <div class="grid" id="waste-grid">
+                <div class="card">
+                    <h3>Used Oil</h3>
+                    <p><strong>Description:</strong> Used motor or cooking oil that can pollute soil and water.</p>
+                    <p><strong>Disposal:</strong> Bring in sealed containers to the facility or collection events.</p>
+                </div>
+
+<grok-card data-id="0f2e7d" data-type="image_card"></grok-card>
+
+
+
+<grok-card data-id="81bd8c" data-type="image_card"></grok-card>
+
+
+                <div class="card">
+                    <h3>Busted Fluorescent Lamps (BFL)</h3>
+                    <p><strong>Description:</strong> Broken CFLs or tubes containing mercury.</p>
+                    <p><strong>Disposal:</strong> Store carefully in a box; bring to facility (handle intact ones similarly).</p>
+                </div>
+
+<grok-card data-id="4805b2" data-type="image_card"></grok-card>
+
+
+
+<grok-card data-id="9094e7" data-type="image_card"></grok-card>
+
+
+                <div class="card">
+                    <h3>E-Waste</h3>
+                    <p><strong>Description:</strong> Old electronics (phones, computers, appliances) with toxic components.</p>
+                    <p><strong>Disposal:</strong> Drop at Bakakeng Central or collection events.</p>
+                </div>
+
+<grok-card data-id="cf072b" data-type="image_card"></grok-card>
+
+
+
+<grok-card data-id="6f0bf8" data-type="image_card"></grok-card>
+
+
+                <div class="card">
+                    <h3>Expired Medicines</h3>
+                    <p><strong>Description:</strong> Unused or expired drugs that can contaminate water if flushed.</p>
+                    <p><strong>Disposal:</strong> Bring to facility take-back programs (do not flush or trash).</p>
+                </div>
+
+<grok-card data-id="d49b32" data-type="image_card"></grok-card>
+
+
+
+<grok-card data-id="853ecf" data-type="image_card"></grok-card>
+
+            </div>
+        </div>
+
+        <!-- Facilities Tab -->
+        <div id="locations" class="tab-content">
+            <input type="text" id="search-location" placeholder="Search facilities...">
+            <p style="text-align:center;"><strong>Facilities managed by CEPMO:</strong> Bakakeng Central (operational, focus on e-waste/BFL) and The4E (planned for expansion, including used oil and expired medicines).<br>
+            Contact CEPMO for schedules and requirements.</p>
+
+            <div id="map"></div>
+            <div class="grid" id="locations-list">
+                <!-- Filled by JS -->
+            </div>
+        </div>
+    </div>
+
+    <footer id="about">
+        <p>Baguio City Hazardous Waste Storage Facility • Data as of December 2025</p>
+        <p>Managed by CEPMO: Atty. Rhenan G. Diwas (Head), Engr. Wilbur S. Suanding (PCO & WHWMD Head) • Visit baguio.gov.ph or contact CEPMO for latest updates</p>
+    </footer>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script>
+        // Tab switching
+        function openTab(tabName) {
+            document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
+            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+            document.getElementById(tabName).classList.add('active');
+            document.querySelector(`.tab-btn[data-tab="${tabName}"]`).classList.add('active');
+
+            if (tabName === 'locations' && !window.mapInitialized) {
+                initializeMap();
+                window.mapInitialized = true;
+            }
+        }
+
+        document.querySelectorAll('.tab-btn').forEach(btn => {
+            btn.addEventListener('click', () => openTab(btn.dataset.tab));
+        });
+
+        // Nav handling
+        document.querySelectorAll('nav a').forEach(link => {
+            link.addEventListener('click', function(e) {
+                const href = this.getAttribute('href');
+                if (href === '#database') {
+                    e.preventDefault();
+                    openTab('waste');
+                    window.scrollTo({ top: document.querySelector('.tabs').offsetTop - 80, behavior: 'smooth' });
+                } else {
+                    document.querySelector(href).scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
+
+        // Waste search
+        document.getElementById('search-waste').addEventListener('input', function() {
+            const query = this.value.toLowerCase();
+            document.querySelectorAll('#waste-grid .card').forEach(card => {
+                card.classList.toggle('hidden', !card.textContent.toLowerCase().includes(query));
+            });
+        });
+
+        // Locations data
+        const locations = [
+            { name: "Bakakeng Central TSD Facility", city: "Baguio City", address: "Bakakeng Central/Sur MRF", hours: "Contact CEPMO for schedule", notes: "Operational; accepts e-waste, BFL, used oil, expired medicines", lat: 16.426, lng: 120.568, planned: false },
+            { name: "The4E Hazardous Waste Storage Facility", city: "Baguio City", address: "Dontogan Area (DA Bureau of Soils Property)", hours: "Planned; expected 2026+", notes: "Future expansion for broader hazardous waste including the four accepted items", lat: 16.420, lng: 120.580, planned: true },
+            { name: "CEPMO Office / Collection Events", city: "Baguio City", address: "City Hall or barangay events", hours: "Varies", notes: "Coordination point for drop-offs and schedules", lat: 16.415, lng: 120.593, planned: false }
+        ];
+
+        let map, markers;
+
+        function initializeMap() {
+            map = L.map('map').setView([16.415, 120.593], 13);
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                attribution: '&copy; OpenStreetMap contributors'
+            }).addTo(map);
+
+            markers = L.markerClusterGroup();
+            locations.forEach(loc => {
+                const marker = L.marker([loc.lat, loc.lng]);
+                marker.bindPopup(`<b>${loc.name}</b><br>${loc.address}<br><i>${loc.hours}</i><br>${loc.notes}`);
+                markers.addLayer(marker);
+
+                const card = document.createElement('div');
+                card.className = 'card';
+                let plannedHtml = loc.planned ? `<div class="planned"><strong>Status:</strong> Planned/Under Development</div>` : '';
+                card.innerHTML = `<h3>${loc.name}</h3>
+                                  <p><strong>Location:</strong> ${loc.city}</p>
+                                  <p><strong>Address:</strong> ${loc.address}</p>
+                                  <p><strong>Hours/Info:</strong> ${loc.hours}</p>
+                                  <p><strong>Notes:</strong> ${loc.notes}</p>
+                                  ${plannedHtml}
+                                  <p><strong>GPS:</strong> ${loc.lat.toFixed(4)}, ${loc.lng.toFixed(4)}</p>`;
+                document.getElementById('locations-list').appendChild(card);
+            });
+            map.addLayer(markers);
+        }
+
+        // Location search
+        document.getElementById('search-location').addEventListener('input', function() {
+            const query = this.value.toLowerCase();
+            document.querySelectorAll('#locations-list .card').forEach(card => {
+                card.classList.toggle('hidden', !card.textContent.toLowerCase().includes(query));
+            });
+        });
+    </script>
+</body>
+</html>
