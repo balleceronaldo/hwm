@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Baguio City Hazardous Waste Storage Facility</title>
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.css" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.Default.css" />
     <style>
         body { font-family: 'Segoe UI', Arial, sans-serif; margin: 0; padding: 0; background-color: #f8f9fa; color: #333; line-height: 1.6; }
         header {
@@ -61,7 +63,7 @@
         <h2 style="text-align:center; color:#228B22;">Welcome</h2>
         <div class="important-note">
             Current Acceptance (December 12, 2025): ONLY Used Oil • Busted Fluorescent Lamps (BFL) • E-Waste • Expired Medicines<br><br>
-            Bring to the drop-off point shown below.
+            Bring to the drop-off points shown below.
         </div>
         <p style="text-align:center; font-size:1.2em; max-width:900px; margin:30px auto;">
             Managed by the City Environment and Parks Management Office (CEPMO) under Atty. Rhenan G. Diwas (Head) and Engr. Wilbur S. Suanding (PCO & WHWMD Head).
@@ -70,7 +72,7 @@
         <div class="tabs" id="database">
             <button class="tab-btn active" data-tab="accepted">Accepted Items</button>
             <button class="tab-btn" data-tab="general">General HHW Info</button>
-            <button class="tab-btn" data-tab="locations">Drop-Off Point</button>
+            <button class="tab-btn" data-tab="locations">Drop-Off Points</button>
         </div>
 
         <!-- Accepted Items Tab -->
@@ -81,7 +83,7 @@
                 <div class="card accepted">
                     <h3>Used Oil</h3>
                     <p><strong>Why hazardous?</strong> Pollutes water and soil severely.</p>
-                    <p><strong>How to dispose:</strong> Pour into sealed containers; drop at the facility.</p>
+                    <p><strong>How to dispose:</strong> Pour into sealed containers; drop at facility/events.</p>
                 </div>
                 <div class="card accepted">
                     <h3>Busted Fluorescent Lamps (BFL)</h3>
@@ -91,7 +93,7 @@
                 <div class="card accepted">
                     <h3>E-Waste</h3>
                     <p><strong>Why hazardous?</strong> Contains lead, mercury, etc.</p>
-                    <p><strong>How to dispose:</strong> Drop intact items at the facility.</p>
+                    <p><strong>How to dispose:</strong> Drop intact items at Bakakeng or events.</p>
                 </div>
                 <div class="card accepted">
                     <h3>Expired Medicines</h3>
@@ -136,21 +138,13 @@
             </div>
         </div>
 
-        <!-- Drop-Off Point Tab with Map (one pin) -->
+        <!-- Drop-Off Points Tab with Map (multiple pins) -->
         <div id="locations" class="tab-content">
             <p style="text-align:center; font-size:1.1em;">
-                Main permanent drop-off point. Click the pin for details.
+                Click pins for details. Contact CEPMO for current schedules and event locations.
             </p>
             <div id="map"></div>
-            <div class="grid">
-                <div class="card">
-                    <h3>Bakakeng Central Drop-Off Point</h3>
-                    <p><strong>Address:</strong> Bakakeng Central/Sur Materials Recovery Facility (MRF), Baguio City</p>
-                    <p><strong>Accepted Items:</strong> Used Oil, Busted Fluorescent Lamps (BFL), E-Waste, Expired Medicines</p>
-                    <p><strong>Hours/Info:</strong> Contact CEPMO for current schedule</p>
-                    <p><strong>GPS Coordinates:</strong> 16.3960, 120.5783</p>
-                </div>
-            </div>
+            <div class="grid" id="locations-list"></div>
         </div>
     </div>
 
@@ -161,6 +155,7 @@
     </footer>
 
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="https://unpkg.com/leaflet.markercluster@1.4.1/dist/leaflet.markercluster.js"></script>
     <script>
         function openTab(tabName) {
             document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
@@ -201,20 +196,36 @@
             });
         });
 
-        // Map with one pin
+        // Map with all points
         function initializeMap() {
-            const map = L.map('map').setView([16.3960, 120.5783], 15); // Centered on Bakakeng with good zoom
+            const map = L.map('map').setView([16.415, 120.593], 13);
             L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
                 attribution: '&copy; OpenStreetMap contributors'
             }).addTo(map);
 
-            const marker = L.marker([16.3960, 120.5783]).addTo(map);
-            marker.bindPopup(`
-                <b>Bakakeng Central Drop-Off Point</b><br>
-                Bakakeng Central/Sur MRF, Baguio City<br>
-                Accepts: Used Oil, BFL, E-Waste, Expired Medicines<br>
-                Contact CEPMO for schedule
-            `).openPopup(); // Popup opens automatically
+            const markers = L.markerClusterGroup();
+            const locations = [
+                { name: "Bakakeng Central Permanent Drop-Off", address: "Bakakeng Central/Sur MRF", hours: "Contact CEPMO", notes: "Main permanent drop-off for the 4 accepted items", lat: 16.3960, lng: 120.5783 },
+                { name: "Scheduled Collection Events", address: "Various (e.g., Malcom Square)", hours: "Announced events", notes: "Regular drives – check CEPMO", lat: 16.4138, lng: 120.5957 },
+                { name: "The4E Hazardous Waste Facility (Planned)", address: "Dontogan Area", hours: "Expected 2026+", notes: "Future expansion", lat: 16.3818, lng: 120.5722 },
+                { name: "CEPMO Coordination Office", address: "Baguio City Hall", hours: "Office hours", notes: "Inquiries & schedules", lat: 16.4140, lng: 120.5910 }
+            ];
+
+            locations.forEach(loc => {
+                const marker = L.marker([loc.lat, loc.lng]);
+                marker.bindPopup(`<b>${loc.name}</b><br>${loc.address}<br><i>${loc.hours}</i><br>${loc.notes}`);
+                markers.addLayer(marker);
+
+                const card = document.createElement('div');
+                card.className = 'card';
+                card.innerHTML = `<h3>${loc.name}</h3>
+                                  <p><strong>Address:</strong> ${loc.address}</p>
+                                  <p><strong>Hours/Info:</strong> ${loc.hours}</p>
+                                  <p><strong>Notes:</strong> ${loc.notes}</p>
+                                  <p><strong>GPS:</strong> ${loc.lat.toFixed(4)}, ${loc.lng.toFixed(4)}</p>`;
+                document.getElementById('locations-list').appendChild(card);
+            });
+            map.addLayer(markers);
         }
     </script>
 </body>
