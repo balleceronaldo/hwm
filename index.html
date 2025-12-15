@@ -157,10 +157,11 @@
     <nav>
         <a href="#home">Home</a>
         <a href="#database">HHW Guide</a>
-        <a href="#about">Contact & Info</a>
+        <a href="#about">Contact Info</a>
     </nav>
 
-    <div class="container" id="home">
+    <div class="container">
+        <div id="home"></div> <!-- Anchor for Home – ensures "Welcome" is at the top when clicked -->
         <h2 style="text-align:center; color:#228B22;">Welcome</h2>
         <div class="important-note">
             Current Acceptance (December 15, 2025): ONLY Used Oil • Busted Fluorescent Lamps (BFL) • E-Waste • Expired Medicines<br><br>
@@ -252,7 +253,7 @@
     </div>
 
     <footer>
-        <div id="about"></div> <!-- Anchor moved here for correct scrolling on mobile -->
+        <div id="about"></div>
         <div class="footer-contact">
             <div>
                 <strong>Office Address:</strong><br>
@@ -302,7 +303,8 @@
                     openTab('accepted');
                     window.scrollTo({ top: document.querySelector('.tabs').offsetTop - 100, behavior: 'smooth' });
                 } else if (document.querySelector(href)) {
-                    document.querySelector(href).scrollIntoView({ behavior: 'smooth' });
+                    e.preventDefault();
+                    document.querySelector(href).scrollIntoView({ behavior: 'smooth', block: 'start' });
                 }
             });
         });
