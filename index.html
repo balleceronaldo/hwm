@@ -9,7 +9,6 @@
     <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.Default.css" />
     <link rel="icon" type="image/x-icon" href="logo.ico">
     <link rel="shortcut icon" type="image/x-icon" href="logo.ico">
-    <!-- Font Awesome for icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <style>
         body { font-family: 'Segoe UI', Arial, sans-serif; margin: 0; padding: 0; background-color: #f8f9fa; color: #333; line-height: 1.6; }
@@ -20,7 +19,6 @@
             color: white;
             padding: 100px 20px 60px;
             text-align: center;
-            position: relative;
         }
         .logo-container {
             display: flex;
@@ -158,6 +156,7 @@
             .footer-contact { gap: 15px; }
             .footer-contact div { line-height: 1.5; font-size: 0.95em; }
             .footer-copyright { padding-top: 15px; margin-top: 15px; }
+            .tab-content h2 { font-size: 1.6em; margin-top: 0; padding-top: 20px; }
         }
     </style>
 </head>
@@ -192,7 +191,7 @@
 
         <div class="tabs" id="database">
             <button class="tab-btn active" data-tab="accepted">Accepted Items</button>
-            <button class="tab-btn" data-tab="general">General HHW Info</button>
+            <button class="tab-btn" data-tab="general">HHW Guide</button>
             <button class="tab-btn" data-tab="locations">Drop-Off Points</button>
         </div>
 
@@ -224,11 +223,13 @@
             </div>
         </div>
 
-        <!-- General HHW Info Tab -->
+        <!-- HHW Guide Tab (was General HHW Info) – now with clear title -->
         <div id="general" class="tab-content">
+            <h2 style="text-align:center; color:#228B22; margin-top: 0; padding-top: 20px;">Household Hazardous Waste Guide</h2>
+            <p style="text-align:center; margin-bottom: 25px;">These are common household items that are hazardous in the Philippines. Only 4 are accepted at the facility right now. The rest must be stored safely at home until future collections.</p>
             <input type="text" id="search-general" placeholder="Search all common household hazardous waste...">
             <div class="warning-note">
-                Common household hazardous waste – NOT all accepted yet. Store safely!
+                Not all items accepted yet. Store safely!
             </div>
             <div class="grid" id="general-grid">
                 <div class="card not-accepted">
