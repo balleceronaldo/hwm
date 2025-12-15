@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Activities – Baguio City Hazardous Waste Storage Facility</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.css" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.Default.css" />
+    <link rel="icon" type="image/x-icon" href="logo.ico">
+    <link rel="shortcut icon" type="image/x-icon" href="logo.ico">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style>
+        body { font-family: 'Segoe UI', Arial, sans-serif; margin: 0; padding: 0; background-color: #f8f9fa; color: #333; line-height: 1.6; }
+        header {
+            background-image: linear-gradient(rgba(0, 100, 0, 0.45), rgba(0, 100, 0, 0.45)), url('images/header-bg.jpg');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 100px 20px 60px;
+            text-align: center;
+        }
+        .logo-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 50px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+        .logo-container img {
+            height: 90px;
+            width: auto;
+            object-fit: contain;
+            background: rgba(255, 255, 255, 0.25);
+            padding: 15px;
+            border-radius: 15px;
+            filter: brightness(1.1);
+            transition: transform 0.3s;
+        }
+        .logo-container img:hover {
+            transform: scale(1.08);
+        }
+        header h1 { margin: 0; font-size: 3em; text-shadow: 3px 3px 8px rgba(0,0,0,0.9); }
+        header p { margin: 20px 0 0; font-size: 1.5em; text-shadow: 2px 2px 6px rgba(0,0,0,0.9); }
+        nav {
+            background-color: #006400;
+            padding: 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        nav a {
+            color: white;
+            text-decoration: none;
+            padding: 16px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            font-weight: bold;
+            font-size: 1.1em;
+            flex: 1 1 100px;
+            min-width: 100px;
+        }
+        nav a:hover { background-color: #228B22; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 20px; }
+        .important-note { background: #d4edda; color: #155724; padding: 20px; border-radius: 10px; margin: 25px 0; text-align: center; font-weight: bold; font-size: 1.1em; border: 2px solid #c3e6cb; }
+        footer {
+            background: #333;
+            color: white;
+            padding: 40px 20px 20px;
+            margin-top: 50px;
+            font-size: 1em;
+        }
+        .footer-contact {
+            max-width: 1200px;
+            margin: 0 auto 20px auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            text-align: left;
+        }
+        .footer-contact div {
+            line-height: 1.8;
+        }
+        .footer-contact strong {
+            color: #4CAF50;
+        }
+        .contact-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        .contact-item i {
+            margin-right: 10px;
+            font-size: 1.2em;
+            color: #4CAF50;
+        }
+        .contact-item .label {
+            margin-right: 8px;
+            font-weight: bold;
+        }
+        .footer-social {
+            text-align: center;
+            margin: 20px 0;
+        }
+        .footer-social a {
+            color: white;
+            margin: 0 15px;
+            font-size: 1.2em;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            white-space: nowrap;
+        }
+        .footer-social a i {
+            margin-right: 8px;
+            font-size: 1em;
+        }
+        .footer-social a:hover {
+            color: #4CAF50;
+        }
+        .footer-copyright {
+            text-align: center;
+            font-size: 0.9em;
+            border-top: 1px solid #555;
+            padding-top: 20px;
+            margin-top: 20px;
+        }
+        /* Back to Top Button - 25% opacity when idle */
+        #back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: rgba(34, 139, 34, 0.25);
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8em;
+            cursor: pointer;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+        #back-to-top.show {
+            opacity: 1;
+            visibility: visible;
+        }
+        #back-to-top:hover {
+            background: #228B22;
+            transform: scale(1.1);
+        }
+        @media (max-width: 768px) {
+            header {
+                padding: 30px 20px 40px;
+            }
+            header h1 { font-size: 2.5em; }
+            .logo-container { gap: 20px; margin-bottom: 20px; }
+            .logo-container img { height: 60px; padding: 10px; }
+            nav a { padding: 16px 10px; font-size: 1em; flex: 1 1 100%; }
+            footer { padding: 20px; }
+            .footer-contact { gap: 15px; }
+            .footer-contact div { line-height: 1.5; font-size: 0.95em; }
+            .footer-copyright { padding-top: 15px; margin-top: 15px; }
+            .contact-item .label { display: block; margin-bottom: 4px; }
+            #back-to-top {
+                width: 45px;
+                height: 45px;
+                font-size: 1.6em;
+                bottom: 20px;
+                right: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo-container">
+            <img src="images/baguio-city-logo.png" alt="Baguio City Logo">
+            <img src="images/cepmo-logo.png" alt="CEPMO Logo">
+            <img src="images/breathe-baguio-logo.png" alt="Breathe Baguio Logo">
+        </div>
+        <h1>Baguio City Hazardous Waste Storage Facility</h1>
+        <p>Managed by CEPMO • Safe & Responsible Disposal Guide • City of Pines</p>
+    </header>
+
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="index.html">HHW Guide</a>
+        <a href="activities.html">Activities</a>
+        <a href="announcements.html">Announcements</a>
+        <a href="index.html#footer">Contact Info</a>
+    </nav>
+
+    <div class="container">
+        <h2 style="text-align:center; color:#228B22; margin-top: 40px;">Activities & Events</h2>
+        <p style="text-align:center; font-size:1.2em; max-width:900px; margin:30px auto;">
+            Upcoming hazardous waste collection drives, community clean-ups, educational workshops, and other CEPMO activities.
+        </p>
+
+        <div class="important-note">
+            Check back regularly for scheduled collection events and community activities!
+        </div>
+
+        <!-- Add your calendar or event list here -->
+        <div style="margin-top: 40px; text-align: center; color: #666;">
+            <p><em>(Your calendar or list of upcoming activities will go here)</em></p>
+            <p>Example format:</p>
+            <ul style="display: inline-block; text-align: left; max-width: 600px;">
+                <li><strong>January 15, 2026</strong> – E-Waste & BFL Collection Drive at Malcolm Square</li>
+                <li><strong>February 10, 2026</strong> – Household Hazardous Waste Awareness Seminar</li>
+                <li><strong>March 5, 2026</strong> – Used Oil Drop-Off Event at Bakakeng Facility</li>
+            </ul>
+        </div>
+    </div>
+
+    <footer id="footer">
+        <div class="footer-contact">
+            <div>
+                <strong>Office Address:</strong><br>
+                City Environment and Parks Management Office (CEPMO)<br>
+                Baguio City Hall, Baguio City
+            </div>
+            <div>
+                <strong>Storage Facility Address:</strong><br>
+                BSTP, North Sanitary Camp, Baguio City<br><br>
+                <strong>Contact Information:</strong><br>
+                <div class="contact-item"><i class="fas fa-phone"></i><span class="label">Mobile:</span> 09208180788</div>
+                <div class="contact-item"><i class="fas fa-envelope"></i><span class="label">Email:</span> hazwastecepmo@gmail.com</div>
+            </div>
+        </div>
+
+        <div class="footer-social">
+            <a href="https://facebook.com/cepmobaguio" target="_blank"><i class="fab fa-facebook-f"></i>Facebook</a>
+            <a href="https://instagram.com/cepmobaguio" target="_blank"><i class="fab fa-instagram"></i>Instagram</a>
+            <a href="https://twitter.com/cepmobaguio" target="_blank"><i class="fab fa-x-twitter"></i>X (Twitter)</a>
+        </div>
+
+        <div class="footer-copyright">
+            © 2025 CEPMO HWMS • All rights reserved.
+        </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <div id="back-to-top" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
+        <i class="fas fa-arrow-up"></i>
+    </div>
+
+    <script>
+        // Show/hide back to top button on scroll
+        window.addEventListener('scroll', function() {
+            const btn = document.getElementById('back-to-top');
+            if (window.scrollY > 300) {
+                btn.classList.add('show');
+            } else {
+                btn.classList.remove('show');
+            }
+        });
+    </script>
+</body>
+</html>
