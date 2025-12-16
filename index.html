@@ -147,7 +147,7 @@
             margin-top: 20px;
         }
         .hidden { display: none; }
-        /* Back to Top Button - Always visible */
+        /* Back to Top Button - Always visible, bottom-right */
         #back-to-top {
             position: fixed;
             bottom: 30px;
@@ -348,10 +348,28 @@
         </div>
     </footer>
 
-    <!-- Back to Top Button - Always visible -->
+    <!-- Back to Top Button (bottom-right) -->
     <div id="back-to-top" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
         <i class="fas fa-arrow-up"></i>
     </div>
+
+    <!-- Crisp Chat Script -->
+    <script type="text/javascript">window.$crisp=[];window.CRISP_WEBSITE_ID="5a71dc8c-0080-4374-8e55-960b01efcfa0";(function(){d=document;s=d.createElement("script");s.src="https://client.crisp.chat/l.js";s.async=1;d.getElementsByTagName("head")[0].appendChild(s);})();</script>
+
+    <!-- Custom CSS to move Crisp chat bubble to bottom-left -->
+    <style>
+        #crisp-chatbox {
+            bottom: 20px !important;
+            right: auto !important;
+            left: 20px !important;
+        }
+        @media (max-width: 768px) {
+            #crisp-chatbox {
+                bottom: 80px !important; /* Avoid overlap with back-to-top on mobile */
+                left: 10px !important;
+            }
+        }
+    </style>
 
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <script src="https://unpkg.com/leaflet.markercluster@1.4.1/dist/leaflet.markercluster.js"></script>
@@ -420,6 +438,5 @@
             map.addLayer(markers);
         }
     </script>
-    <script type="text/javascript">window.$crisp=[];window.CRISP_WEBSITE_ID="5a71dc8c-0080-4374-8e55-960b01efcfa0";(function(){d=document;s=d.createElement("script");s.src="https://client.crisp.chat/l.js";s.async=1;d.getElementsByTagName("head")[0].appendChild(s);})();</script>
 </body>
 </html>
