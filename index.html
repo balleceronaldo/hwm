@@ -69,7 +69,7 @@
         nav a:hover { background-color: #228B22; }
         .container { max-width: 1200px; margin: 0 auto; padding: 20px; }
         .tabs { display: flex; border-bottom: 3px solid #ddd; margin-bottom: 30px; flex-wrap: wrap; }
-        .tab-btn { padding: 15px 30px; background: #eee; border: none; cursor: pointer; font-size: 1.2em; flex: 1; transition: background 0.3s; }
+        .tab-btn { padding: 15px 30px; background: #eee; border: none; cursor: pointer; font-size: 1.2em; flex:  1; transition: background 0.3s; }
         .tab-btn.active { background: #228B22; color: white; }
         .tab-content { display: none; animation: fadeIn 0.5s; }
         .tab-content.active { display: block; }
@@ -110,7 +110,7 @@
             align-items: center;
             margin-bottom: 10px;
         }
-        .contact-item i {
+       . contact-item i {
             margin-right: 10px;
             font-size: 1.2em;
             color: #4CAF50;
@@ -156,11 +156,12 @@
             z-index: 1000 !important;
         }
 
-        /* Back-to-Top Button - Same height as chat, placed next to it */
+        /* Back-to-Top Button - Symmetric on desktop (same distance from right as chat is from left) */
         #back-to-top {
             position: fixed;
-            bottom: 20px;           /* Exactly same level as Crisp chat */
-            left: 90px;             /* 20px left margin + ~60px chat bubble width + 10px gap */
+            bottom: 20px;               /* Same height as chat */
+            right: 20px;                /* Mirror the chat's left:20px */
+            left: auto;
             width: 50px;
             height: 50px;
             background: rgba(34, 139, 34, 0.85);
@@ -172,7 +173,7 @@
             font-size: 1.8em;
             cursor: pointer;
             box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-            z-index: 1002;          /* Above Crisp */
+            z-index: 1002;
             transition: all 0.3s ease;
         }
         #back-to-top:hover {
@@ -180,7 +181,7 @@
             transform: scale(1.12);
         }
 
-        /* Mobile: Stack vertically to avoid squeezing */
+        /* Mobile adjustments */
         @media (max-width: 768px) {
             header {
                 padding: 30px 20px 40px;
@@ -206,17 +207,29 @@
             .footer-copyright { padding-top: 15px; margin-top: 15px; }
             .contact-item .label { display: block; margin-bottom: 4px; }
 
+            /* On mobile: both on bottom-left at exactly the same height (side-by-side if space allows, otherwise chat takes priority) */
             #crisp-chatbox {
                 bottom: 20px !important;
                 left: 15px !important;
             }
             #back-to-top {
-                bottom: 85px;       /* Above the chat bubble */
-                left: 15px;
+                bottom: 20px !important;   /* Same height as chat */
+                left: 85px;                /* Placed next to chat with a small gap */
+                right: auto;
                 width: 48px;
                 height: 48px;
                 font-size: 1.6em;
             }
+
+            /* If screen is very narrow, you can fallback to stacking by uncommenting below */
+            /*
+            @media (max-width: 480px) {
+                #back-to-top {
+                    bottom: 80px !important;
+                    left: 15px;
+                }
+            }
+            */
         }
     </style>
 </head>
@@ -354,7 +367,7 @@
         </div>
     </footer>
 
-    <!-- Back to Top Button (same level as chat on desktop) -->
+    <!-- Back to Top Button -->
     <div id="back-to-top" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
         <i class="fas fa-arrow-up"></i>
     </div>
