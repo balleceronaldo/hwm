@@ -148,7 +148,7 @@
         }
         .hidden { display: none; }
 
-        /* Crisp Chatbox - Bottom Left */
+        /* Crisp Chatbox - Bottom Left on all devices */
         #crisp-chatbox {
             bottom: 20px !important;
             left: 20px !important;
@@ -156,12 +156,11 @@
             z-index: 1000 !important;
         }
 
-        /* Back-to-Top Button - Bottom Right on Desktop (symmetric to chat) */
+        /* Back-to-Top Button - Bottom Right on all devices */
         #back-to-top {
             position: fixed;
-            bottom: 20px;               /* Same height as chat */
-            right: 20px;                /* Same distance from right edge as chat from left */
-            left: auto;
+            bottom: 20px;
+            right: 20px;
             width: 50px;
             height: 50px;
             background: rgba(34, 139, 34, 0.85);
@@ -181,7 +180,7 @@
             transform: scale(1.12);
         }
 
-        /* Mobile adjustments */
+        /* Mobile adjustments - slightly smaller spacing and button size */
         @media (max-width: 768px) {
             header {
                 padding: 30px 20px 40px;
@@ -207,15 +206,13 @@
             .footer-copyright { padding-top: 15px; margin-top: 15px; }
             .contact-item .label { display: block; margin-bottom: 4px; }
 
-            /* Mobile: Chat on left edge, Back-to-top on right edge – both at same height */
             #crisp-chatbox {
                 bottom: 20px !important;
                 left: 15px !important;
             }
             #back-to-top {
-                bottom: 20px !important;    /* Exactly same height as chat */
-                right: 15px !important;     /* Pushed to the right edge of the phone screen */
-                left: auto;
+                bottom: 20px;
+                right: 15px;
                 width: 48px;
                 height: 48px;
                 font-size: 1.6em;
@@ -357,7 +354,7 @@
         </div>
     </footer>
 
-    <!-- Back to Top Button -->
+    <!-- Back to Top Button (bottom-right on all devices) -->
     <div id="back-to-top" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
         <i class="fas fa-arrow-up"></i>
     </div>
