@@ -45,7 +45,6 @@
         header h1 { margin: 0; font-size: 3em; text-shadow: 3px 3px 8px rgba(0,0,0,0.9); }
         header p { margin: 20px 0 0; font-size: 1.5em; text-shadow: 2px 2px 6px rgba(0,0,0,0.9); }
         nav {
-            background-color: #006400;
             padding: 0;
             position: sticky;
             top: 0;
@@ -54,6 +53,7 @@
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
+            background: linear-gradient(to bottom, #006400, #32CD32); /* Same gradient as index and activities */
         }
         nav a {
             color: white;
@@ -65,8 +65,11 @@
             text-align: center;
             font-weight: bold;
             font-size: 1.1em;
+            transition: background-color 0.3s ease;
         }
-        nav a:hover { background-color: #228B22; }
+        nav a:hover {
+            background-color: rgba(0, 128, 0, 0.8); /* Same hover effect */
+        }
         .container { max-width: 1200px; margin: 0 auto; padding: 20px; }
         .announcement {
             background: white;
@@ -225,7 +228,6 @@
         <h1>Baguio City Hazardous Waste Storage Facility</h1>
         <p>Managed by CEPMO • Safe & Responsible Disposal Guide • City of Pines</p>
     </header>
-
     <nav>
         <a href="index.html">Home</a>
         <a href="index.html">HHW Guide</a>
@@ -233,13 +235,11 @@
         <a href="announcements.html">Announcements</a>
         <a href="index.html#footer">Contact Info</a>
     </nav>
-
     <div class="container">
         <h2 style="text-align:center; color:#228B22; margin-top: 40px;">Announcements</h2>
         <p style="text-align:center; font-size:1.2em; max-width:900px; margin:30px auto;">
             Latest updates and planned activities from the CEPMO Hazardous Waste Management Section.
         </p>
-
         <div class="announcement">
             <h2>1st Quarter 2026 Hazardous Waste Section Activities</h2>
             <p>The CEPMO Hazardous Waste Management Section is rolling out the following initiatives in the first quarter of 2026:</p>
@@ -250,41 +250,32 @@
                     Storage capacity: 112 drums (200 liters each)<br>
                     Action: Establish collection points and integrate schedules with regular solid waste collection<br>
                     Development: Flowcharts of process and collection guidelines</li>
-
                 <li><strong>Coordination with Barangays and Haulers</strong><br>
                     January: Site visits to hazardous waste facilities<br>
                     Schedule meetings with barangays<br>
                     Schedule meetings with DENR-accredited haulers (Kerith, Aspuria)<br>
                     Prepare market survey for supplies (drums, XRF Spectrophotometer, spill kits/fire extinguishers, bins, etc.)</li>
-
                 <li><strong>Inspections</strong><br>
                     Conduct inspections of auto shops and junkshops</li>
-
                 <li><strong>Motor and Cooking Oil Waste Management</strong><br>
                     Proper labeling of drums and assessment of available/needed drums</li>
-
                 <li><strong>E-Waste Collection and TSD Operation</strong><br>
                     Continued expansion of e-waste collection and treatment, storage, and disposal operations</li>
-
                 <li><strong>IEC (Information, Education, and Communication Campaign)</strong><br>
                     Barangay-level awareness programs<br>
                     Distribution of compliance posters<br>
                     Proper handover and spill handling guides</li>
-
                 <li><strong>Inventory of 'For Disposal' Hazardous Wastes</strong><br>
                     Comprehensive inventory update</li>
-
                 <li><strong>Eco Fair Participation</strong><br>
                     Planning and coordination for upcoming Eco Fair event</li>
             </ul>
             <p style="margin-top: 30px; font-style: italic;">Stay tuned for specific dates, locations, and participation guidelines. Contact CEPMO for more information.</p>
         </div>
-
         <div class="important-note">
             More announcements will be posted as schedules are finalized.
         </div>
     </div>
-
     <footer id="footer">
         <div class="footer-contact">
             <div>
@@ -300,23 +291,19 @@
                 <div class="contact-item"><i class="fas fa-envelope"></i><span class="label">Email:</span> hazwastecepmo@gmail.com</div>
             </div>
         </div>
-
         <div class="footer-social">
             <a href="https://facebook.com/cepmobaguio" target="_blank"><i class="fab fa-facebook-f"></i>Facebook</a>
             <a href="https://instagram.com/cepmobaguio" target="_blank"><i class="fab fa-instagram"></i>Instagram</a>
             <a href="https://twitter.com/cepmobaguio" target="_blank"><i class="fab fa-x-twitter"></i>X (Twitter)</a>
         </div>
-
         <div class="footer-copyright">
             © 2025 CEPMO HWMS • All rights reserved.
         </div>
     </footer>
-
     <!-- Back to Top Button -->
     <div id="back-to-top" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
         <i class="fas fa-arrow-up"></i>
     </div>
-
     <script>
         // Show/hide back to top button on scroll
         window.addEventListener('scroll', function() {
