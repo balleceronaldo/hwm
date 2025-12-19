@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ordinance – Baguio City Hazardous Waste Storage Facility</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style>
+        body { font-family: 'Segoe UI', Arial, sans-serif; margin: 0; padding: 0; background-color: #f8f9fa; color: #333; line-height: 1.6; }
+        header {
+            background-image: linear-gradient(rgba(0, 100, 0, 0.45), rgba(0, 100, 0, 0.45)), url('images/header-bg.jpg');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 100px 20px 60px;
+            text-align: center;
+        }
+        .logo-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 50px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+        .logo-container img {
+            height: 90px;
+            width: auto;
+            object-fit: contain;
+            background: rgba(255, 255, 255, 0.25);
+            padding: 15px;
+            border-radius: 15px;
+            filter: brightness(1.1);
+            transition: transform 0.3s;
+        }
+        .logo-container img:hover {
+            transform: scale(1.08);
+        }
+        header h1 { margin: 0; font-size: 3em; text-shadow: 3px 3px 8px rgba(0,0,0,0.9); }
+        header p { margin: 20px 0 0; font-size: 1.5em; text-shadow: 2px 2px 6px rgba(0,0,0,0.9); }
+        nav {
+            padding: 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            background: linear-gradient(to bottom, #006400, #32CD32);
+        }
+        nav a {
+            color: white;
+            text-decoration: none;
+            padding: 14px 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            font-weight: bold;
+            font-size: 1.1em;
+            transition: background-color 0.3s ease;
+        }
+        nav a:hover {
+            background-color: rgba(0, 128, 0, 0.8);
+        }
+        .container { max-width: 1200px; margin: 0 auto; padding: 20px; }
+        .ordinance-title {
+            text-align: center;
+            color: #228B22;
+            font-size: 2.2em;
+            margin: 40px 0 20px;
+        }
+        .toc {
+            background: white;
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: 0 6px 12px rgba(0,0,0,0.1);
+            margin-bottom: 40px;
+        }
+        .toc h2 {
+            color: #228B22;
+            text-align: center;
+            margin-top: 0;
+        }
+        .toc ul {
+            list-style: none;
+            padding: 0;
+        }
+        .toc li {
+            margin: 12px 0;
+        }
+        .toc a {
+            color: #006400;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.1em;
+        }
+        .toc a:hover {
+            color: #228B22;
+            text-decoration: underline;
+        }
+        .section {
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 6px 12px rgba(0,0,0,0.1);
+            margin-bottom: 40px;
+        }
+        .section h2 {
+            color: #228B22;
+            border-bottom: 2px solid #32CD32;
+            padding-bottom: 10px;
+            margin-top: 0;
+        }
+        .section p, .section ul {
+            margin-left: 20px;
+        }
+        .section ul {
+            padding-left: 40px;
+        }
+        .important-note {
+            background: #d4edda;
+            color: #155724;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 25px 0;
+            text-align: center;
+            font-weight: bold;
+            font-size: 1.1em;
+            border: 2px solid #c3e6cb;
+        }
+        footer {
+            background: #333;
+            color: white;
+            padding: 40px 20px 20px;
+            margin-top: 50px;
+            font-size: 1em;
+        }
+        .footer-contact {
+            max-width: 1200px;
+            margin: 0 auto 20px auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            text-align: left;
+        }
+        .footer-contact strong { color: #4CAF50; }
+        .contact-item { display: flex; align-items: center; margin-bottom: 10px; }
+        .contact-item i { margin-right: 10px; font-size: 1.2em; color: #4CAF50; }
+        .contact-item .label { margin-right: 8px; font-weight: bold; }
+        .footer-social { text-align: center; margin: 20px 0; }
+        .footer-social a { color: white; margin: 0 15px; font-size: 1.2em; text-decoration: none; display: inline-flex; align-items: center; }
+        .footer-social a i { margin-right: 8px; font-size: 1em; }
+        .footer-social a:hover { color: #4CAF50; }
+        .footer-copyright { text-align: center; font-size: 0.9em; border-top: 1px solid #555; padding-top: 20px; margin-top: 20px; }
+        #back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: rgba(34, 139, 34, 0.25);
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8em;
+            cursor: pointer;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+        #back-to-top.show { opacity: 1; visibility: visible; }
+        #back-to-top:hover { background: #228B22; transform: scale(1.1); }
+        @media (max-width: 768px) {
+            header { padding: 30px 20px 40px; }
+            header h1 { font-size: 2.5em; }
+            .logo-container { gap: 20px; margin-bottom: 20px; }
+            .logo-container img { height: 60px; padding: 10px; }
+            nav a { flex-basis: 33.33%; padding: 12px 4px; font-size: 0.85em; box-sizing: border-box; }
+            nav a:nth-child(4), nav a:nth-child(5) { flex-basis: 50%; }
+            #back-to-top { width: 45px; height: 45px; font-size: 1.6em; bottom: 20px; right: 20px; }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo-container">
+            <img src="images/baguio-city-logo.png" alt="Baguio City Logo">
+            <img src="images/cepmo-logo.png" alt="CEPMO Logo">
+            <img src="images/breathe-baguio-logo.png" alt="Breathe Baguio Logo">
+        </div>
+        <h1>Baguio City Hazardous Waste Storage Facility</h1>
+        <p>Managed by CEPMO • Safe & Responsible Disposal Guide • City of Pines</p>
+    </header>
+
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="index.html">HHW Guide</a>
+        <a href="activities.html">Activities</a>
+        <a href="announcements.html">Announcements</a>
+        <a href="ordinance.html">Ordinance</a>
+        <a href="index.html#footer">Contact Info</a>
+    </nav>
+
+    <div class="container">
+        <h1 class="ordinance-title">City Ordinance on Hazardous Waste Management</h1>
+
+        <!-- Table of Contents -->
+        <div class="toc">
+            <h2>Table of Contents</h2>
+            <ul>
+                <li><a href="#section1">Section 1 – Title</a></li>
+                <li><a href="#section2">Section 2 – Declared Policy</a></li>
+                <li><a href="#section3">Section 3 – Scope and Coverage</a></li>
+                <li><a href="#section4">Section 4 – Definition of Terms</a></li>
+                <li><a href="#section5">Section 5 – Hazardous Waste Management</a></li>
+                <li><a href="#section6">Section 6 – Hazardous Waste Collection and Transport</a></li>
+                <li><a href="#section7">Section 7 – Hazardous Waste Storage, Treatment and Disposal</a></li>
+                <li><a href="#section8">Section 8 – Database Management</a></li>
+                <li><a href="#section9">Section 9 – Role of Small Quantity Generator and Micro-Enterprise Generator</a></li>
+                <li><a href="#section10">Section 10 – Role of the City Environment and Parks Management Office</a></li>
+                <li><a href="#section11">Section 11 – Role of the Barangay Officials</a></li>
+                <li><a href="#section12">Section 12 – Collection of Electronic Waste Outside of Baguio City</a></li>
+                <li><a href="#section13">Section 13 – Disposal of Electronic Waste from Local Government Units</a></li>
+                <li><a href="#section14">Section 14 – Hazardous Waste Fees</a></li>
+                <li><a href="#section15">Section 15 – Prohibited Acts</a></li>
+                <li><a href="#section16">Section 16 – Penalties for Violations</a></li>
+                <li><a href="#section17">Section 17 – Incentive</a></li>
+                <li><a href="#section18">Section 18 – Awards and Recognition</a></li>
+                <li><a href="#section19">Section 19 – Funding</a></li>
+                <li><a href="#section20">Section 20 – Implementing Departments</a></li>
+                <li><a href="#section21">Section 21 – Separability Clause</a></li>
+                <li><a href="#section22">Section 22 – Effectivity Clause</a></li>
+            </ul>
+        </div>
+
+        <!-- Ordinance Sections -->
+        <div id="section1" class="section">
+            <h2>Section 1 – Title</h2>
+            <p>This ordinance shall be known as <strong>An Ordinance Establishing a Local Hazardous Waste Program, Providing Guidelines for the Handling, Storage, Collection, Transport, Treatment and Disposal of Hazardous Waste in the City of Baguio</strong>.</p>
+        </div>
+
+        <div id="section2" class="section">
+            <h2>Section 2 – Declared Policy</h2>
+            <p>The city recognizes the vital importance of protecting public health and the environment from the adverse effects of hazardous waste. It shall implement the proper handling, collection, storage, transport, treatment, and disposal of hazardous wastes through a local management program. This program shall prioritize the management of household hazardous wastes (HHW) and hazardous wastes generated by small-scale sources—such as ambulant vendors, small eateries (e.g., 4-seater establishments), and other micro-enterprises—which, while governed by the standards of RA 6969, require localized collection and consolidation by the City to ensure environmentally sound disposal through accredited facilities.</p>
+        </div>
+
+        <div id="section3" class="section">
+            <h2>Section 3 – Scope and Coverage</h2>
+            <p>This Ordinance shall cover the entire territorial jurisdiction of the City of Baguio. It shall apply to households, city government offices, and small-scale sources that produce the following hazardous wastes:</p>
+            <ul>
+                <li>Arsenic and its compounds (Waste Number D402)</li>
+                <li>Lead compounds (Waste Number D406)</li>
+                <li>Mercury and mercury compounds (Waste Number D407)</li>
+                <li>Solvent Based (Waste Number F601)</li>
+                <li>Grease wastes (Waste Number H802)</li>
+                <li>Used industrial oil including sludge (Waste Number I101)</li>
+                <li>Vegetable Oil including sludge (Waste Number I102)</li>
+                <li>Tallow (Waste Number I103)</li>
+                <li>Container previously containing toxic chemical substances (Waste Number J201)</li>
+                <li>Pharmaceuticals and drugs (Waste Number M503)</li>
+                <li>Pesticides (Waste Number M504)</li>
+                <li>Waste Electrical and electronic equipment (Waste Number M506)</li>
+                <li>Special Wastes (Waste Number M507)</li>
+            </ul>
+        </div>
+
+        <div id="section4" class="section">
+            <h2>Section 4 – Definition of Terms</h2>
+            <p>Key terms used in this ordinance include:</p>
+            <ul>
+                <li><strong>Busted Fluorescent Lamps</strong> – damaged or non-functional lamps containing mercury compounds.</li>
+                <li><strong>Clustered Hazardous Waste Management</strong> – collective arrangement by small generators for transport and disposal.</li>
+                <li><strong>Hazardous Wastes</strong> – substances posing unreasonable risk to health and environment.</li>
+                <li><strong>Household Hazardous Waste (HHW)</strong> – hazardous waste from residential sources.</li>
+                <li><strong>Small Quantity Generator</strong> – generates between 5,000 and 250,000 kg/year of hazardous waste.</li>
+                <li><strong>Waste Electrical and Electronic Equipment (E-waste)</strong> – discarded electronic devices.</li>
+                <!-- (other definitions summarized for brevity) -->
+            </ul>
+            <p>(Full definitions available in the official ordinance document.)</p>
+        </div>
+
+        <div id="section5" class="section">
+            <h2>Section 5 – Hazardous Waste Management</h2>
+            <p>Hazardous waste management comprises methods to minimize or eliminate effects on human health and the environment, including minimization, collection, transportation, treatment, and disposal.</p>
+        </div>
+
+        <div id="section6" class="section">
+            <h2>Section 6 – Hazardous Waste Collection and Transport</h2>
+            <p>Collection shall avoid public nuisance and include:</p>
+            <ul>
+                <li>Establishment of barangay collection points and schedules</li>
+                <li>Hiring of accredited transporters by small-scale generators</li>
+                <li>Collection and transport of e-waste to authorized facilities</li>
+            </ul>
+        </div>
+
+        <div id="section7" class="section">
+            <h2>Section 7 – Hazardous Waste Storage, Treatment and Disposal</h2>
+            <p>The City Government shall operate temporary storage facilities, coordinate with agencies, and comply with national regulations.</p>
+        </div>
+
+        <div id="section8" class="section">
+            <h2>Section 8 – Database Management</h2>
+            <p>The City shall maintain a Hazardous Waste Information Database accessible to the public, including directories, guidelines, collection locations, and data-sharing with DENR.</p>
+        </div>
+
+        <div id="section9" class="section">
+            <h2>Section 9 – Role of Small Quantity Generator and Micro-Enterprise Generator</h2>
+            <p>Responsibilities include registration, segregation, labeling, manifesting, and safe storage.</p>
+        </div>
+
+        <div id="section10" class="section">
+            <h2>Section 10 – Role of the City Environment and Parks Management Office (CEPMO)</h2>
+            <p>CEPMO shall secure permits, monitor, conduct IEC campaigns, operate facilities, collect waste, and perform related functions.</p>
+        </div>
+
+        <div id="section11" class="section">
+            <h2>Section 11 – Role of the Barangay Officials</h2>
+            <p>Barangays shall conduct IEC, establish collection schedules, submit reports, and install signage.</p>
+        </div>
+
+        <div id="section12" class="section">
+            <h2>Section 12 – Collection of Electronic Waste Outside of Baguio City</h2>
+            <p>Non-residents shall pay ₱30.00/kg processing fee; 30% share allocated to participating barangays.</p>
+        </div>
+
+        <div id="section13" class="section">
+            <h2>Section 13 – Disposal of Electronic Waste from Local Government Units</h2>
+            <p>Other LGUs must enter into a Memorandum of Agreement for disposal.</p>
+        </div>
+
+        <div id="section14" class="section">
+            <h2>Section 14 – Hazardous Waste Fees</h2>
+            <p>Households and micro-enterprises shall pay monthly flat rates (schedule to be defined).</p>
+        </div>
+
+        <div id="section15" class="section">
+            <h2>Section 15 – Prohibited Acts</h2>
+            <p>Includes improper disposal, burning, unauthorized transport, and obstruction of collection points.</p>
+        </div>
+
+        <div id="section16" class="section">
+            <h2>Section 16 – Penalties for Violations</h2>
+            <p>First offense: ₱1,000<br>Second: ₱1,500<br>Third: ₱5,000 or 6-month business permit suspension.<br>Fines accrue to the General Fund.</p>
+        </div>
+
+        <div id="section17" class="section">
+            <h2>Section 17 – Incentive</h2>
+            <p>20% discount on city regulatory fees/taxes for complete manifest submission.</p>
+        </div>
+
+        <div id="section18" class="section">
+            <h2>Section 18 – Awards and Recognition</h2>
+            <p>“Luntiang Baguio Waste Warrior Award” for compliant generators.</p>
+        </div>
+
+        <div id="section19" class="section">
+            <h2>Section 19 – Funding</h2>
+            <p>₱1,000,000 initial appropriation from General Fund, incorporated annually in CEPMO budget.</p>
+        </div>
+
+        <div id="section20" class="section">
+            <h2>Section 20 – Implementing Departments</h2>
+            <p>CEPMO is the lead department, supported by various city offices.</p>
+        </div>
+
+        <div id="section21" class="section">
+            <h2>Section 21 – Separability Clause</h2>
+            <p>Invalidity of any provision shall not affect the remainder.</p>
+        </div>
+
+        <div id="section22" class="section">
+            <h2>Section 22 – Effectivity Clause</h2>
+            <p>Takes effect per Local Government Code provisions.</p>
+        </div>
+
+        <div class="important-note">
+            This page contains the full text of the proposed City Ordinance on Hazardous Waste Management. Official enactment status to be confirmed with the Sangguniang Panlungsod.
+        </div>
+    </div>
+
+    <footer id="footer">
+        <div class="footer-contact">
+            <div>
+                <strong>Office Address:</strong><br>
+                City Environment and Parks Management Office (CEPMO)<br>
+                Baguio City Hall, Baguio City
+            </div>
+            <div>
+                <strong>Storage Facility Address:</strong><br>
+                BSTP, North Sanitary Camp, Baguio City<br><br>
+                <strong>Contact Information:</strong><br>
+                <div class="contact-item"><i class="fas fa-phone"></i><span class="label">Mobile:</span> 09208180788</div>
+                <div class="contact-item"><i class="fas fa-envelope"></i><span class="label">Email:</span> hazwastecepmo@gmail.com</div>
+            </div>
+        </div>
+
+        <div class="footer-social">
+            <a href="https://facebook.com/cepmobaguio" target="_blank"><i class="fab fa-facebook-f"></i>Facebook</a>
+            <a href="https://instagram.com/cepmobaguio" target="_blank"><i class="fab fa-instagram"></i>Instagram</a>
+            <a href="https://twitter.com/cepmobaguio" target="_blank"><i class="fab fa-x-twitter"></i>X (Twitter)</a>
+        </div>
+
+        <div class="footer-copyright">
+            © 2025 CEPMO HWMS • All rights reserved.
+        </div>
+    </footer>
+
+    <div id="back-to-top" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
+        <i class="fas fa-arrow-up"></i>
+    </div>
+
+    <script>
+        window.addEventListener('scroll', function() {
+            const btn = document.getElementById('back-to-top');
+            if (window.scrollY > 300) {
+                btn.classList.add('show');
+            } else {
+                btn.classList.remove('show');
+            }
+        });
+    </script>
+</body>
+</html>
