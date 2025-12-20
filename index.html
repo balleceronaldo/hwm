@@ -67,36 +67,6 @@
             transition: background-color 0.3s ease;
             position: relative;
         }
-        /* Button used as dropdown trigger (Laws) */
-/* Make button behave EXACTLY like nav links */
-.nav-link {
-    all: unset;               /* remove ALL default button styles */
-    box-sizing: border-box;
-
-    color: white;
-    text-decoration: none;
-    padding: 14px 24px;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    font-weight: bold;
-    font-size: 1.05em;
-    line-height: 1;
-
-    cursor: pointer;
-}
-
-/* Hover state identical to nav links */
-.nav-link:hover {
-    background-color: rgba(0, 128, 0, 0.8);
-}
-
-
-.nav-link:hover {
-    background-color: rgba(0, 128, 0, 0.8);
-}
         nav a:hover {
             background-color: rgba(0, 128, 0, 0.8);
         }
@@ -127,7 +97,6 @@
             opacity: 0;
             visibility: hidden;
             transition: opacity 0.25s ease, visibility 0.25s ease;
-            z-index: 200;
         }
         .nav-dropdown.open .nav-dropdown-content {
             display: block;
@@ -302,15 +271,11 @@
                 padding: 14px 8px;
                 font-size: 0.92em;
             }
-            /* Mobile submenu: drop down without affecting the nav bar background height */
             .nav-dropdown-content {
-                position: absolute;
+                position: static;
                 width: 100%;
-                left: 0;
-                transform: none;
-                box-shadow: 0 8px 16px rgba(0,0,0,0.3);
-                background: #006400;
-                border-radius: 0 0 8px 8px;
+                box-shadow: none;
+                background: rgba(0,100,0,0.9);
             }
             .nav-dropdown-content a {
                 padding: 12px 10px;
@@ -340,9 +305,7 @@
     <nav>
         <a href="index.html">Home</a>
         <div class="nav-dropdown">
-           <button type="button" id="lawsLink" class="nav-link" aria-haspopup="true" aria-expanded="false">
-                Laws<i class="fas fa-chevron-down"></i>
-           </button>
+            <a href="laws.html" id="lawsLink">Laws<i class="fas fa-chevron-down"></i></a>
             <div class="nav-dropdown-content">
                 <a href="hw_laws.html">HW Laws</a>
                 <a href="ordinance.html">Ordinance</a>
@@ -589,7 +552,44 @@
             });
             map.addLayer(markers);
             document.getElementById('locateBtn').addEventListener('click', function() {
-                /* locate button code unchanged */
+                if (!navigator.geolocation) {
+                    alert('Geolocation is not supported by your browser.');
+                    return;
+                }
+                this.disabled = true;
+                this.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Locating...';
+                map.locate({ setView: true, maxZoom: 16 });
+                map.on('locationfound', function(e) {
+                    const radius = e.accuracy / 2;
+                    if (userMarker) map.removeLayer(userMarker);
+                    userMarker = L.marker(e.latlng).addTo(map)
+                        .bindPopup(`You are here (accuracy: ±${Math.round(radius)}m)`).openPopup();
+                    L.circle(e.latlng, radius).addTo(map);
+                    let nearest = null;
+                    let minDist = Infinity;
+                    markers.eachLayer(function(marker) {
+                        const dist = map.distance(e.latlng, marker.getLatLng());
+                        if (dist < minDist) {
+                            minDist = dist;
+                            nearest = marker;
+                        }
+                    });
+                    if (nearest) {
+                        const distKm = (minDist / 1000).toFixed(2);
+                        map.setView(nearest.getLatLng(), 16);
+                        nearest.openPopup();
+                        nearest.getPopup().setContent(
+                            nearest.getPopup().getContent() + `<br><br><strong>Nearest to you: ~${distKm} km away</strong>`
+                        );
+                    }
+                    document.getElementById('locateBtn').innerHTML = '<i class="fas fa-location-crosshairs"></i> Find Nearest Drop-Off';
+                    document.getElementById('locateBtn').disabled = false;
+                });
+                map.on('locationerror', function() {
+                    alert('Unable to find your location. Please allow location access and try again.');
+                    document.getElementById('locateBtn').innerHTML = '<i class="fas fa-location-crosshairs"></i> Find Nearest Drop-Off';
+                    document.getElementById('locateBtn').disabled = false;
+                });
             });
         }
     </script>
