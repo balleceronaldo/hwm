@@ -70,21 +70,23 @@
         nav a:hover {
             background-color: rgba(0, 128, 0, 0.8);
         }
-        /* Improved, smaller & narrower dropdown */
+        /* Slim & elegant dropdown */
         .nav-dropdown {
             position: relative;
         }
         .nav-dropdown > a::after {
-            content: " ▼";
-            font-size: 0.75em;
-            margin-left: 4px;
+            content: "\f078"; /* Font Awesome chevron-down - smaller and cleaner */
+            font-family: "Font Awesome 6 Free";
+            font-weight: 900;
+            font-size: 0.7em;
+            margin-left: 6px;
+            opacity: 0.8;
         }
         .nav-dropdown-content {
             display: none;
             position: absolute;
             background: #006400;
-            min-width: 180px; /* Narrower submenu */
-            max-width: 200px;
+            min-width: 160px; /* Even narrower */
             box-shadow: 0 8px 16px rgba(0,0,0,0.3);
             border-radius: 0 0 8px 8px;
             top: 100%;
@@ -92,17 +94,12 @@
             transform: translateX(-50%);
             opacity: 0;
             visibility: hidden;
-            transition: opacity 0.3s ease, visibility 0.3s ease, transform 0.2s ease;
+            transition: opacity 0.25s ease, visibility 0.25s ease, transform 0.15s ease;
         }
         .nav-dropdown-content a {
-            padding: 10px 16px;
-            font-size: 0.95em; /* Smaller font in submenu */
-            justify-content: flex-start;
-            border-bottom: 1px solid rgba(255,255,255,0.1);
-        }
-        .nav-dropdown-content a:last-child {
-            border-bottom: none;
-            border-radius: 0 0 8px 8px;
+            padding: 9px 14px; /* Compact padding */
+            font-size: 0.92em; /* Smaller font */
+            justify-content: center;
         }
         .nav-dropdown-content a:hover {
             background: #228B22;
@@ -111,7 +108,7 @@
             display: block;
             opacity: 1;
             visibility: visible;
-            transform: translateX(-50%) translateY(3px);
+            transform: translateX(-50%) translateY(2px);
         }
         .container { max-width: 1200px; margin: 0 auto; padding: 20px; }
         .tabs { display: flex; border-bottom: 3px solid #ddd; margin-bottom: 30px; flex-wrap: wrap; }
@@ -130,7 +127,6 @@
         .important-note { background: #d4edda; color: #155724; padding: 20px; border-radius: 10px; margin: 25px 0; text-align: center; font-weight: bold; font-size: 1.1em; border: 2px solid #c3e6cb; }
         .warning-note { background: #fff3cd; color: #856404; padding: 20px; border-radius: 10px; margin: 25px 0; text-align: center; font-weight: bold; }
         #map { height: 500px; border-radius: 12px; margin: 30px 0; box-shadow: 0 6px 12px rgba(0,0,0,0.1); }
-        /* Locate button */
         .locate-button {
             position: absolute;
             top: 15px;
@@ -257,13 +253,12 @@
                 transform: none;
                 left: 0;
                 min-width: auto;
-                max-width: none;
                 box-shadow: none;
                 background: rgba(0,100,0,0.9);
             }
             .nav-dropdown-content a {
                 font-size: 0.95em;
-                padding: 12px 20px;
+                padding: 10px 20px;
             }
             .tab-btn { flex-basis: 100%; font-size: 1.1em; }
             footer { padding: 20px; }
@@ -291,8 +286,8 @@
         <div class="nav-dropdown">
             <a href="laws.html">Laws</a>
             <div class="nav-dropdown-content">
-                <a href="hw_laws.html">National HW Laws</a>
-                <a href="ordinance.html">Local Ordinance</a>
+                <a href="hw_laws.html">HW Laws</a>
+                <a href="ordinance.html">Ordinance</a>
             </div>
         </div>
         <a href="activities.html">Activities</a>
