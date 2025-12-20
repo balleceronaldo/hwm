@@ -80,21 +80,21 @@
             flex-shrink: 0;
         }
         .nav-dropdown > a {
-            cursor: default;
+            cursor: pointer; /* Changed from default to pointer for better UX */
         }
         .nav-dropdown > a i {
             margin-left: 8px;
             font-size: 0.8em;
             transition: transform 0.3s ease;
         }
-        .nav-dropdown.open > a i {
+        .nav-dropdown:hover > a i {
             transform: rotate(180deg);
         }
         .nav-dropdown-content {
             display: none;
             position: absolute;
             background: #006400;
-            min-width: 180px;
+            min-width: 200px;
             box-shadow: 0 8px 16px rgba(0,0,0,0.3);
             border-radius: 0 0 8px 8px;
             top: 100%;
@@ -104,8 +104,12 @@
             transition: opacity 0.25s ease, visibility 0.25s ease;
             z-index: 200;
         }
-        .nav-dropdown.open .nav-dropdown-content,
         .nav-dropdown:hover .nav-dropdown-content {
+            display: block;
+            opacity: 1;
+            visibility: visible;
+        }
+        .nav-dropdown.open .nav-dropdown-content {
             display: block;
             opacity: 1;
             visibility: visible;
