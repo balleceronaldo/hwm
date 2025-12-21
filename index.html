@@ -70,7 +70,7 @@
         nav a:hover {
             background-color: rgba(0, 128, 0, 0.8);
         }
-        /* Dropdown with mobile-friendly behavior */
+        /* Dropdown */
         .nav-dropdown {
             position: relative;
         }
@@ -89,14 +89,16 @@
             display: none;
             position: absolute;
             background: #006400;
-            width: 100%;
+            min-width: 200px;
             box-shadow: 0 8px 16px rgba(0,0,0,0.3);
             border-radius: 0 0 8px 8px;
             top: 100%;
-            left: 0;
+            left: 50%;
+            transform: translateX(-50%);
             opacity: 0;
             visibility: hidden;
             transition: opacity 0.25s ease, visibility 0.25s ease;
+            z-index: 100;
         }
         .nav-dropdown.open .nav-dropdown-content {
             display: block;
@@ -104,8 +106,8 @@
             visibility: visible;
         }
         .nav-dropdown-content a {
-            padding: 8px 24px;
-            font-size: 0.88em;
+            padding: 10px 20px;
+            font-size: 0.95em;
             justify-content: center;
             white-space: nowrap;
         }
@@ -271,15 +273,19 @@
                 padding: 14px 8px;
                 font-size: 0.92em;
             }
+            /* Mobile dropdown now uses absolute positioning and overlays */
             .nav-dropdown-content {
-                position: static;
-                width: 100%;
-                box-shadow: none;
-                background: rgba(0,100,0,0.9);
+                position: absolute;
+                width: 200px;
+                left: 50%;
+                transform: translateX(-50%);
+                background: #006400;
+                box-shadow: 0 8px 16px rgba(0,0,0,0.3);
+                border-radius: 0 0 8px 8px;
             }
             .nav-dropdown-content a {
-                padding: 12px 10px;
-                font-size: 0.9em;
+                padding: 12px 20px;
+                font-size: 0.95em;
             }
             .tab-btn { flex-basis: 100%; font-size: 1.1em; }
             footer { padding: 20px; }
@@ -440,20 +446,17 @@
         // Mobile dropdown toggle
         const lawsLink = document.getElementById('lawsLink');
         const dropdown = lawsLink.parentElement;
-
         lawsLink.addEventListener('click', function(e) {
             if (window.innerWidth <= 768) {
                 e.preventDefault();
                 dropdown.classList.toggle('open');
             }
         });
-
         document.addEventListener('click', function(e) {
             if (window.innerWidth <= 768 && !dropdown.contains(e.target)) {
                 dropdown.classList.remove('open');
             }
         });
-
         window.addEventListener('scroll', function() {
             const btn = document.getElementById('back-to-top');
             if (window.scrollY > 300) {
@@ -462,7 +465,6 @@
                 btn.classList.remove('show');
             }
         });
-
         function openTab(tabName) {
             document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
             document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
@@ -474,7 +476,6 @@
             }
         }
         document.querySelectorAll('.tab-btn').forEach(btn => btn.addEventListener('click', () => openTab(btn.dataset.tab)));
-
         document.getElementById('search-accepted').addEventListener('input', function() {
             const query = this.value.toLowerCase();
             document.querySelectorAll('#accepted-grid .card').forEach(card => {
@@ -493,7 +494,6 @@
                 card.classList.toggle('hidden', !card.textContent.toLowerCase().includes(query));
             });
         });
-
         let map, markers, userMarker;
         function initializeMap() {
             map = L.map('map').setView([16.415, 120.593], 13);
